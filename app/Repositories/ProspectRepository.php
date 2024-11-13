@@ -46,7 +46,7 @@ class ProspectRepository
         $stageId,
         $postpone,
         $registerId
-    ){
+    ) {
         try {
             DB::select('CALL sp_create_prospect(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [
                 $userId,
@@ -89,7 +89,7 @@ class ProspectRepository
         $comments,
         $editDate,
         $editorId
-    ){
+    ) {
         try {
             DB::select('CALL sp_update_prospect(?,?,?,?,?,?,?,?,?,?,?,?)', [
                 $id,
@@ -123,10 +123,10 @@ class ProspectRepository
         }
     }
 
-    public function findProspect($email, $telefono, $id_desarrollo)
+    public function findProspect($email, $phone, $developmentId)
     {
         try {
-            $result = DB::select('CALL sp_find_prospect(?, ?, ?)', [$email, $telefono, $id_desarrollo]);
+            $result = DB::select('CALL sp_find_prospect(?, ?, ?)', [$email, $phone, $developmentId]);
             return count($result) > 0 ? $result[0] : null;
         } catch (\Throwable $th) {
             error_log($th->getMessage());

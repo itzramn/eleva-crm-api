@@ -43,7 +43,7 @@ class ProspectService
         $stageId,
         $postpone,
         $registerId
-    ){
+    ) {
         return $this->prospectRepository->createProspect(
             $userId,
             $name,
@@ -81,7 +81,7 @@ class ProspectService
         $editDate,
         $editorId
 
-    ){
+    ) {
         return $this->prospectRepository->updateProspect(
             $id,
             $name,
@@ -103,8 +103,15 @@ class ProspectService
         return $this->prospectRepository->deleteProspect($id);
     }
 
-    public function findProspect($email, $telefono, $id_desarrollo)
-    {
-        return $this->prospectRepository->findProspect($email, $telefono, $id_desarrollo);
+    public function findProspect(
+        $email,
+        $phone,
+        $developmentId
+    ) {
+        return $this->prospectRepository->findProspect(
+            $email,
+            $phone,
+            $developmentId
+        );
     }
 }

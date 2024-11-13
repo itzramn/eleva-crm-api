@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class ProspectControlller extends Controller
+class ProspectController extends Controller
 {
     protected $prospectService;
 
@@ -19,7 +19,7 @@ class ProspectControlller extends Controller
     public function index(Request $request)
     {
 
-        $validator =Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'userId' => 'required',
             'developmentId' => 'required',
         ])->validate();
@@ -36,7 +36,7 @@ class ProspectControlller extends Controller
     {
         $prospect = $this->prospectService->getProspect($id);
 
-        if(!$prospect) {
+        if (!$prospect) {
             $data = [
                 'message' => 'Prospecto no encontrado',
                 'status' => 404
@@ -71,7 +71,7 @@ class ProspectControlller extends Controller
             'registerId' => 'required'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $data = [
                 'message' => 'Error en la validación de los datos',
                 'errors' => $validator->errors(),
@@ -83,9 +83,9 @@ class ProspectControlller extends Controller
         $validatedData = $validator->validated();
 
         $existingProspect = $this->prospectService->findProspect(
-        $validatedData['email'],
-        $validatedData['phone'],
-        $validatedData['developmentId'],
+            $validatedData['email'],
+            $validatedData['phone'],
+            $validatedData['developmentId'],
         );
 
         if ($existingProspect) {
@@ -118,7 +118,7 @@ class ProspectControlller extends Controller
             $validatedData['registerId']
         );
 
-        if(!$prospect) {
+        if (!$prospect) {
             $data = [
                 'message' => 'Error al crear el prospecto',
                 'status' => 500
@@ -138,7 +138,7 @@ class ProspectControlller extends Controller
     {
         $prospect = $this->prospectService->getProspect($id);
 
-        if(!$prospect) {
+        if (!$prospect) {
             $data = [
                 'message' => 'Prospecto no encontrado',
                 'status' => 404
@@ -161,7 +161,7 @@ class ProspectControlller extends Controller
             'editorId' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $data = [
                 'message' => 'Error en la validación de los datos',
                 'errors' => $validator->errors(),
@@ -201,7 +201,7 @@ class ProspectControlller extends Controller
             $validatedData['editorId']
         );
 
-        if(!$updated) {
+        if (!$updated) {
             $data = [
                 'message' => 'Error al actualizar el prospecto',
                 'status' => 500
@@ -221,7 +221,7 @@ class ProspectControlller extends Controller
     {
         $prospect = $this->prospectService->getProspect($id);
 
-        if(!$prospect) {
+        if (!$prospect) {
             $data = [
                 'message' => 'Prospecto no encontrado',
                 'status' => 404
@@ -231,7 +231,7 @@ class ProspectControlller extends Controller
 
         $deleted = $this->prospectService->deleteProspect($id);
 
-        if(!$deleted) {
+        if (!$deleted) {
             $data = [
                 'message' => 'Error al eliminar el prospecto',
                 'status' => 500
